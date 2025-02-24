@@ -65,7 +65,6 @@ public class Shape {
             timePassedFromCollision = -1;
         }
 
-        // check moving horizontal
         if (!(x + deltaX + coords[0].length > 10) && !(x + deltaX < 0)) {
 
             for (int row = 0; row < coords.length; row++) {
@@ -85,7 +84,6 @@ public class Shape {
 
         }
 
-        // Check position + height(number of row) of shape
         if (timePassedFromCollision == -1) {
             if (!(y + 1 + coords.length > 20)) {
 
@@ -128,17 +126,6 @@ public class Shape {
                 }
             }
         }
-
-//        for (int row = 0; row < reference.length; row++) {
-//            for (int col = 0; col < reference[0].length; col++) {
-//                if (reference[row][col] != 0) {
-//                    g.fillRect(col * 30 + 320, row * 30 + 160, Board.blockSize, Board.blockSize);
-//                }
-//
-//            }
-//
-//        }
-
     }
 
     private void checkLine() {

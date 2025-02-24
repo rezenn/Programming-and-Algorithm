@@ -19,60 +19,32 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements KeyListener, MouseListener, MouseMotionListener {
 
-	//Assets
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
-
     private BufferedImage pause, refresh;
-
-	//board dimensions (the playing area)
     private final int boardHeight = 20, boardWidth = 10;
-
-	// block size
     public static final int blockSize = 30;
-
-	// field
     private Color[][] board = new Color[boardHeight][boardWidth];
-
-	// array with all the possible shapes
     private Shape[] shapes = new Shape[7];
-
-	// currentShape
     private static Shape currentShape, nextShape;
-
-	// game loop
     private Timer looper;
-
     private int FPS = 60;
-
     private int delay = 1000 / FPS;
-
-	// mouse events variables
     private int mouseX, mouseY;
-
     private boolean leftClick = false;
-
     private Rectangle stopBounds, refreshBounds;
-
     private boolean gamePaused = false;
-
     private boolean gameOver = false;
     
     private Color[] colors = {Color.decode("#ed1c24"), Color.decode("#ff7f27"), Color.decode("#fff200"), 
         Color.decode("#22b14c"), Color.decode("#00a2e8"), Color.decode("#a349a4"), Color.decode("#3f48cc")};
     private Random random = new Random();
-	// buttons press lapse
     private Timer buttonLapse = new Timer(300, new ActionListener() {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             buttonLapse.stop();
         }
     });
 
-	// score
     private int score = 0;
 
     public Board() {
@@ -87,42 +59,40 @@ public class Board extends JPanel implements KeyListener, MouseListener, MouseMo
         refreshBounds = new Rectangle(350, 500 - refresh.getHeight() - 20, refresh.getWidth(),
                 refresh.getHeight() + refresh.getHeight() / 2);
 
-		// create game looper
         looper = new Timer(delay, new GameLooper());
 
-		// create shapes
         shapes[0] = new Shape(new int[][]{
-            {1, 1, 1, 1} // I shape;
+            {1, 1, 1, 1}
         }, this, colors[0]);
 
         shapes[1] = new Shape(new int[][]{
             {1, 1, 1},
-            {0, 1, 0}, // T shape;
+            {0, 1, 0},
         }, this, colors[1]);
 
         shapes[2] = new Shape(new int[][]{
             {1, 1, 1},
-            {1, 0, 0}, // L shape;
+            {1, 0, 0},
         }, this, colors[2]);
 
         shapes[3] = new Shape(new int[][]{
             {1, 1, 1},
-            {0, 0, 1}, // J shape;
+            {0, 0, 1},
         }, this, colors[3]);
 
         shapes[4] = new Shape(new int[][]{
             {0, 1, 1},
-            {1, 1, 0}, // S shape;
+            {1, 1, 0},
         }, this, colors[4]);
 
         shapes[5] = new Shape(new int[][]{
             {1, 1, 0},
-            {0, 1, 1}, // Z shape;
+            {0, 1, 1}, 
         }, this, colors[5]);
 
         shapes[6] = new Shape(new int[][]{
             {1, 1},
-            {1, 1}, // O shape;
+            {1, 1}, 
         }, this, colors[6]);
 
     }
